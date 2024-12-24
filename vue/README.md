@@ -14,6 +14,17 @@
 d1 + Vue + workers
 
 ***
+* dev start
+```
+yarn start
+```
+* react build , other window
+
+```
+yarn watch
+```
+
+***
 ### Setting
 
 * wrangler.toml
