@@ -18,7 +18,7 @@ d1 + Vue + workers
 ```
 yarn start
 ```
-* react build , other window
+* Vue build , other window
 
 ```
 yarn watch
