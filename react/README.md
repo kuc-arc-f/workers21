@@ -14,6 +14,16 @@
 d1 +  workers , React etc
 
 ***
+* dev start
+```
+yarn start
+```
+* react build , other window
+
+```
+yarn watch
+```
+***
 ### Setting
 
 * wrangler.toml
