@@ -35,7 +35,9 @@ database_name = ""
 database_id = ""
 ```
 ***
-### blog 
+# License
+
+* MIT
 
 ***
 
