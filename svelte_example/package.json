@@ -8,6 +8,7 @@
     "start": "wrangler dev",
     "build": "vite build --mode client && npm run build:css",
     "build:css": "npx tailwindcss -i ./src/main.css -o ./public/main.css",
+    "clean": "rimraf public/static",
     "watch": "nodemon"
   },
   "devDependencies": {
