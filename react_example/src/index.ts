@@ -1,4 +1,3 @@
-import { todoRouter } from './routes/todo';
 
 interface Env {
   DB: D1Database;
@@ -6,8 +5,10 @@ interface Env {
 
 import Top from './pages/App';
 
+import { todoRouter } from './routes/todo';
 import { todo11Router } from './routes/todo11';
 import { todo14Router } from './routes/todo14';
+import { todo24Router } from './routes/todo24';
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
@@ -45,6 +46,21 @@ export default {
             status: res.status
           });
         }
+      }
+      if (path.startsWith('/api/todo24')) {
+        res = await todo24Router(corsHeaders, request, env, Response);
+        if(res.ret) {
+          return new Response(res.data, {
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+            status: res.status
+          });
+        }
+      }
+      if (path.startsWith('/api/')) {
+        return new Response('', {
+          headers: corsHeaders,
+          status: 404,
+        });
       }
 
       //MPA

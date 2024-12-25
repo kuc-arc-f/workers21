@@ -265,6 +265,22 @@ CREATE TABLE todo21 (
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+--todo24
+CREATE TABLE todo24 (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT NOT NULL,
+  content TEXT,
+  public_type TEXT CHECK (public_type IN ('公開', '非公開')) NOT NULL,
+  food_orange BOOLEAN DEFAULT FALSE,
+  food_apple BOOLEAN DEFAULT FALSE,
+  food_banana BOOLEAN DEFAULT FALSE,
+  pub_date1 TEXT,
+  pub_date2 TEXT,
+  pub_date3 TEXT,
+  qty1 TEXT,
+  qty2 TEXT,
+  qty3 TEXT
+);
 
 
 
