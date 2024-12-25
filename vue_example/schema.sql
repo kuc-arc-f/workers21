@@ -265,6 +265,22 @@ CREATE TABLE todo21 (
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+--todo23
+CREATE TABLE todo23 (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT NOT NULL,
+  content TEXT,
+  public_type TEXT CHECK (public_type IN ('public', 'private')),
+  food_orange INTEGER DEFAULT 0,
+  food_apple INTEGER DEFAULT 0,
+  food_banana INTEGER DEFAULT 0,
+  pub_date1 TEXT,
+  pub_date2 TEXT,
+  pub_date3 TEXT,
+  qty1 TEXT,
+  qty2 TEXT,
+  qty3 TEXT
+);
 
 
 

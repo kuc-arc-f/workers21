@@ -6,6 +6,7 @@ const ASSET_URL = "/public/"; // 静的ファイルのベース URL
 import Top from './pages/App';
 
 import { todo21Router } from './routes/todo21';
+import { todo23Router } from './routes/todo23';
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
@@ -37,6 +38,22 @@ console.log("path=", path);
           });
         }
       }
+      if (path.startsWith('/api/todo23')) {
+        res = await todo23Router(corsHeaders, request, env, Response);
+        if(res.ret) {
+          return new Response(res.data, {
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+            status: res.status
+          });
+        }
+      }
+      if (path.startsWith('/api/')) {
+        return new Response('Not Found', {
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 404,
+        });
+      }
+
       //MPA
       const htm = Top({});
       return new Response(htm, {
