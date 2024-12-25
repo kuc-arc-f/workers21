@@ -5,7 +5,7 @@ console.log("#App.vue");
 </script>
 
 <template>
-  <div class="text-4xl">hello , Vue
+  <div class="text-4xl">Hello , Vue
   </div>
 </template>
 
