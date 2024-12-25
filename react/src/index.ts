@@ -22,7 +22,7 @@ export default {
     }  
     const url = new URL(request.url);
     const path = url.pathname;
-    console.log("path=", path);
+    console.log("url.pathname= ", path);
     try{
       let res = {}
 
@@ -31,7 +31,7 @@ export default {
       return new Response(htm, {
         headers: {"Content-Type": "text/html"}
       });
-      return new Response('Hello World!');
+      //return new Response('Hello World!');
     } catch (error) {
       console.error('Error:', error);
       return new Response('Internal Server Error', {
