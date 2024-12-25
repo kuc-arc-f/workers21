@@ -15,7 +15,7 @@ export default {
 		return new Response(htm, {
 			headers: {"Content-Type": "text/html"}
 		});
-	  //return new Response('Hello World!');
+	  //return new Response('Hello World!');  
 	},
 } satisfies ExportedHandler<Env>;
 
