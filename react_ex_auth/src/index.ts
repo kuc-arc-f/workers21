@@ -8,11 +8,6 @@ import Top from './pages/App';
 import Login from './pages/Login';
 import renderMove from './pages/renderMove';
 
-import { todoRouter } from './routes/todo';
-import { todo11Router } from './routes/todo11';
-import { todo14Router } from './routes/todo14';
-import { todo24Router } from './routes/todo24';
-
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const corsHeaders = {
@@ -28,33 +23,6 @@ export default {
     console.log("method=", method);
     try{
       let res = {}
-      if (path.startsWith('/api/todo11')) {
-        res = await todo11Router(corsHeaders, request, env, Response);
-        if(res.ret) {
-          return new Response(res.data, {
-            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-            status: res.status
-          });
-        }
-      }
-      if (path.startsWith('/api/todo14')) {
-        res = await todo14Router(corsHeaders, request, env, Response);
-        if(res.ret) {
-          return new Response(res.data, {
-            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-            status: res.status
-          });
-        }
-      }
-      if (path.startsWith('/api/todo24')) {
-        res = await todo24Router(corsHeaders, request, env, Response);
-        if(res.ret) {
-          return new Response(res.data, {
-            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-            status: res.status
-          });
-        }
-      }
       if (path.startsWith('/api/')) {
         return new Response('', {
           headers: corsHeaders,
