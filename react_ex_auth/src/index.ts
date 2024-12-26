@@ -35,7 +35,7 @@ export default {
         return handleLogin(request, env);
       }
       if (url.pathname !== "/login" && request.method === "GET") {
-        const resAuth = await handleProtectedPage(request);
+        const resAuth = await handleProtectedPage(request, env);
         console.log("resAuth=", resAuth);
         if(!resAuth){
           const htm = renderMove({path : '/login'});
@@ -82,9 +82,12 @@ async function handleLogin(request: any, env: any) {
 
 // 認証が必要なページ
 // * @return true: sucsess
-async function handleProtectedPage(request) : boolean
+async function handleProtectedPage(request, env) : boolean
 {
   let ret = false;
+  if(!env.USER_NAME && !env.PASSWORD){
+    return true;
+  }
   const cookies = parseCookies(request);
   //console.log(cookies);
   if (cookies[COOKIE_NAME]) {
