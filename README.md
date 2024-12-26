@@ -6,12 +6,12 @@
 
  date    : 2024/12/23
 
- update  : 2024/12/24 
+ update  : 2024/12/26 
 
 ***
 ### Summary
 
-workers + d1 , React Vue
+workers + d1 , React Vue Svelte
 
 ***
 ### Setting
@@ -34,6 +34,14 @@ binding = "DB"
 database_name = ""
 database_id = ""
 ```
+
+***
+### Example
+* react : react example
+* react_ex_auth : React auth example
+* vue : vue example
+* svelte : svelte  example
+
 ***
 # License
 
