@@ -28,7 +28,6 @@ node_compat = true
 assets = { directory = "./public/" }
 
 [vars]
-# API_KEY = "123"
 USER_NAME = ""
 PASSWORD = ""
 
