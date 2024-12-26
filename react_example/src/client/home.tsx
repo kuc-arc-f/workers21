@@ -6,10 +6,10 @@ const App: React.FC = () => {
   return (
   <>
     <Head />
-    <div className="text-3xl">home 
+    <div className="text-3xl">home.tsx
     </div>
   </>
   );
 };
 
-export default App; 
+export default App;
