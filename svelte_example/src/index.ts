@@ -92,7 +92,7 @@ async function getCookieAuth(request, env) : boolean
 {
   let ret = "";
   if(!env.USER_NAME && !env.PASSWORD){
-    return true;
+    return ret;
   }
   const cookies = parseCookies(request);
   //console.log(cookies);
