@@ -41,6 +41,7 @@ database_id = ""
 * react_ex_auth : React auth example
 * vue : vue example
 * svelte : svelte  example
+* svelte5: svelte5 example
 
 ***
 # License
