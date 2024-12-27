@@ -1,0 +1,31 @@
+{
+  "name": "workers21",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "start": "wrangler dev",
+    "build": "vite build --mode client && npm run build:css",
+    "build:css": "npx tailwindcss -i ./src/main.css -o ./public/main.css",
+    "clean": "rimraf public/static",
+    "watch": "nodemon"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241218.0",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@tsconfig/svelte": "^5.0.4",
+    "better-sqlite3": "^11.5.0",
+    "typescript": "^5.5.2",
+    "autoprefixer": "^10.4.20",
+    "nodemon": "^3.1.7",
+    "postcss": "^8.4.49",
+    "rimraf": "^6.0.1",
+    "svelte": "^5.15.0",
+    "svelte-check": "^4.1.1",
+    "svelte-spa-router": "^4.0.1",
+    "tailwindcss": "^3.4.17",
+    "vite": "^6.0.5",
+    "wrangler": "^3.60.3"
+  }
+}

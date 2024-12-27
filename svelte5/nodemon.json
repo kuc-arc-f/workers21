@@ -1,0 +1,6 @@
+{
+  "watch": ["src"],
+  "ext": "ts,tsx,svelte,css", 
+  "ignore": ["src/index.ts"],
+  "exec": "npm run build"
+}
