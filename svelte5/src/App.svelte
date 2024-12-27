@@ -1,23 +1,39 @@
 <script lang="ts">
-</script>
-
-<main>
-  <div>
-    <a href="https://vite.dev" target="_blank" rel="noreferrer">
-    </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-    </a>
-  </div>
-  <h1 class="text-4xl">home</h1>
-  <hr class="my-2" />
-  <div class="card">
-  </div>
-
-
-  <p class="read-the-docs">
-    text, 1234
-  </p>
-</main>
-
-<style>
-</style>
+  import Router from 'svelte-spa-router'
+  //
+  import Head from './components/Head.svelte'
+  import LibLayout from './client/lib/LibLayout';
+    //
+    const pages = import.meta.glob('./client/*.svelte', { eager: true })
+    
+    const routes = Object.keys(pages).map((path) => {
+      const name = path.match(/\.\/client\/(.*)\.svelte$/)[1]
+      return {
+        name,
+        path: name === 'Home' ? '/' : `/${name.toLowerCase()}`,
+        component: pages[path].default,
+      }
+    })
+    export let routeArray = {};
+    routes.forEach((item, idx) => {
+      //console.log(item)
+      let path = item.path;
+      let compo = item.component;
+      routeArray[item.path] = compo;
+    });
+  LibLayout.startProc();
+  </script>
+  
+  
+  <!-- -->
+  <main>
+      <hr />
+      <Router routes={routeArray} />
+      <hr />
+  </main>
+  
+  <style>
+  </style>
+  <!--
+  -->
+    
