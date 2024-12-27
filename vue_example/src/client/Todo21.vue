@@ -1,6 +1,7 @@
 <template>
+  <Head />
   <div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4">TODO App</h1>
+    <h1 class="text-2xl font-bold mb-4">Todo21</h1>
 
     <div class="mb-4 flex">
       <input
@@ -40,9 +41,11 @@
 
   </div>
 </template>
+
 <script>
 import { onMounted, computed } from 'vue';
 import TodoDialog from './Todo21/TodoDialog.vue';
+import Head from "../components/Head.vue";
 
 //let API_BASE = "http://localhost:8787/api/todo21";
 let API_BASE = "/api/todo21";
@@ -68,6 +71,7 @@ async function getSysApiUrl(){
 
 export default {
   components: {
+      Head,
       TodoDialog,
     },
   data() {

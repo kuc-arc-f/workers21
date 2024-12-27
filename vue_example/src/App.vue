@@ -1,7 +1,5 @@
 <script setup lang="ts">
-//import HelloWorld from './components/HelloWorld.vue'
 import { RouterLink } from 'vue-router';
-//import Header from './components/Header.vue'
 //
 const pages = import.meta.glob('./client/*.vue', { eager: true })
 const routes = Object.keys(pages).map((path) => {
@@ -19,10 +17,6 @@ let items = routes;
 
 <template>
   <div>
-    <li v-for="item in items" :key="item.path">
-      <router-link :to="'' + item.path">{{item.name}}</router-link>
-    </li>
-    <hr />
     <router-view></router-view>
   </div>
 </template>
@@ -30,3 +24,9 @@ let items = routes;
 <style scoped>
 </style>
 
+<!-- 
+<li v-for="item in items" :key="item.path">
+  <router-link :to="'' + item.path">{{item.name}}</router-link>
+</li>
+<hr />
+-->

@@ -30,6 +30,7 @@ yarn watch
 ### Setting
 
 * wrangler.toml
+* auth: USER_NAME , PASSWORD set
 
 ```
 name = "workers21"
@@ -40,7 +41,8 @@ node_compat = true
 assets = { directory = "./public/" }
 
 [vars]
-API_KEY = "123"
+USER_NAME = ""
+PASSWORD = ""
 
 [[d1_databases]]
 binding = "DB"
