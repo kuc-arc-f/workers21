@@ -1,6 +1,7 @@
 
 <script lang="ts">
   import { onMount } from 'svelte';
+  import Head from "../components/Head.svelte";
   import TodoDialog from './Todo11/TodoDialog.svelte';
   import type { Todo } from './Todo11/types';
   import * as api from './Todo11/api';
@@ -74,6 +75,7 @@
   }
 </script>
 
+<Head />
 <div class="container mx-auto px-4 py-8">
   <h1 class="text-3xl font-bold mb-8">TODOリスト</h1>
 

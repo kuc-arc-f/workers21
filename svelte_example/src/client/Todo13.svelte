@@ -3,6 +3,7 @@
   import { api } from './Todo13/api';
   import TodoDialog from './Todo13/TodoDialog.svelte';
   import type { Todo } from './Todo13/types';
+  import Head from "../components/Head.svelte";
 
   let todos: Todo[] = [];
   let isDialogOpen = false;
@@ -97,6 +98,7 @@ console.log(todo);
   }
 </script>
 
+<Head />
 <div class="container mx-auto p-4">
   <div class="mb-6 flex justify-between items-center">
       <h1 class="text-2xl font-bold">TODOリスト</h1>

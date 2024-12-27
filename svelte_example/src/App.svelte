@@ -1,7 +1,8 @@
 <script lang="ts">
-  import Router from 'svelte-spa-router'
-  //
-  import Head from './components/Head.svelte'
+import Router from 'svelte-spa-router'
+//
+import Head from './components/Head.svelte'
+import LibLayout from './client/lib/LibLayout';
   //
   const pages = import.meta.glob('./client/*.svelte', { eager: true })
   
@@ -20,25 +21,26 @@
     let compo = item.component;
     routeArray[item.path] = compo;
   });
-  //console.log(routeArray);
-  </script>
-  
-  <!-- -->
-  <main>
-      <nav>
-      {#each routes as item}
-      <div>
-        <a href={`/#${item.path}`}>{item.name}</a>
-      </div>
-      {/each}	
-      </nav>
-      <hr />
-      <Router routes={routeArray} />
-      <hr />
-  </main>
-  
-  <style>
-  </style>
-  <!--
-  -->
+LibLayout.startProc();
+</script>
+
+
+<!-- -->
+<main>
+    <hr />
+    <Router routes={routeArray} />
+    <hr />
+</main>
+
+<style>
+</style>
+<!--
+<nav>
+{#each routes as item}
+<div>
+  <a href={`/#${item.path}`}>{item.name}</a>
+</div>
+{/each}	
+</nav>
+-->
   
