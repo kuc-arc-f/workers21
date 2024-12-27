@@ -50,10 +50,6 @@ export default {
 				status: 404
 			});
 		}
-		if (url.pathname === "/login" && request.method === "POST") {
-			// ログイン処理
-			return handleLogin(request, env);
-		}
 
 		//MPA 
 		const coolieAuth = await getCookieAuth(request, env);

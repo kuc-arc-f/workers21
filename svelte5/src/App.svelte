@@ -16,13 +16,12 @@
     })
     export let routeArray = {};
     routes.forEach((item, idx) => {
-      //console.log(item)
       let path = item.path;
       let compo = item.component;
       routeArray[item.path] = compo;
     });
-  LibLayout.startProc();
-  </script>
+  //LibLayout.startProc();
+</script>
   
   
   <!-- -->
