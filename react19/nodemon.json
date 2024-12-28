@@ -1,0 +1,6 @@
+{
+  "watch": ["src"],
+  "ext": "ts,tsx,vue,css", 
+  "ignore": ["src/index.ts"],
+  "exec": "npm run build"
+}
