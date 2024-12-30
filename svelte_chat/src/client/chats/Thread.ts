@@ -128,7 +128,21 @@ const Thread = {
       const item = {
         id: id
       }
-      const json = await HttpCommon.server_post(item, "/threads/delete");
+      console.log(item);
+      const target: any = JSON.stringify(item);	
+      const res = await fetch("/api/threads/delete", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},      
+        body: target
+      });
+      const json = await res.json()
+      if (res.status !== 200) {
+        console.log(json);   
+        throw new Error(await res.text());
+      }
+      if (json.ret !==  LibConfig.OK_CODE) {
+        throw new Error("Error, json.ret <> OK");
+      }
       console.log(json);
       return ret;
     } catch (e) {

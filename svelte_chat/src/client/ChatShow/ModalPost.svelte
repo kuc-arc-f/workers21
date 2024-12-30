@@ -155,11 +155,10 @@ console.log("deleteThread=", id);
         <div class="flex-1 p-2 m-1">
           <h5 class="text-1xl font-bold">{postUserName} </h5>
         </div>
-        <div class="flex-1 p-2 m-1">
-          <span class="text-secondary mx-2">{dateStr} , ID: {post_id}</span>
+        <div class="flex-1 p-2 m-1 text-end">
+          <span class="text-gray-400 mx-2">{dateStr} , ID: {post_id}</span>
         </div>
       </div>
-        
     </div>
     <div class="modal-body">
         <p>{@html LibCommon.replaceBrString(post_body)}
@@ -177,13 +176,14 @@ console.log("deleteThread=", id);
               Reply</button>
           </div>
         </div>  
-        <!-- thread dateStr = LibCommon.converDateString(item.createdAt); --> 
+        <!-- thread dateStr --> 
         {#each threadItems as item}
         <div>
           <div class="thread_user_name">
-            <span class="text-xl">{item.user_name}: </span>{LibCommon.converDateString(item.createdAt)}
+            <span class="text-1xl font-bold">{item.user_name}</span>
+            <span class="text-gray-400">{LibCommon.converDateString(item.createdAt)}</span>
             <button 
-            class="bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white ms-2 py-0.5 px-1 border border-blue-500 hover:border-transparent rounded;"
+            class="bg-transparent hover:bg-gray-500 text-gray-700 hover:text-white ms-2 py-0.5 px-1 border border-gray-500 hover:border-transparent rounded-md;"
             on:click={() => deleteThread(item.thread_id)} >
             ×
             </button>

@@ -50,8 +50,9 @@ console.log("item_id=", item_id);
   *
   * @return
   */ 
-  delete: async function (req: any, res: any, env: any): Promise<Response>
+  delete: async function (request: any, res: any, env: any): Promise<Response>
   {
+    const req = await request.json();
 console.log(req);
     const retObj = {ret: "NG", data: [], message: ''}
     try{
