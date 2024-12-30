@@ -172,9 +172,10 @@ console.log("deleteThread=", id);
         <div>
           <div class="thread_user_name">
             <span class="fs-5">{item.user_name}: </span>{item.createdAt}
-            <button class="mt-2 btn btn-sm btn-outline-secondary mx-2"
+            <button 
+            class="bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white ms-2 py-0.5 px-1 border border-blue-500 hover:border-transparent rounded;"
             on:click={() => deleteThread(item.thread_id)} >
-              <i class="bi bi-trash-fill"></i>
+            ×
             </button>
           </div>
           
@@ -185,11 +186,11 @@ console.log("deleteThread=", id);
     </div>
     <div class="modal-footer my-2">
         {#if (postUserId === userId)}
-          <button type="button" class="btn btn-outline-danger" id="modal_post_btn_delete"
+          <button type="button" class="btn btn-outline-red" id="modal_post_btn_delete"
           on:click={() => childDeleteItem()}
           >Delete</button>            
         {/if}
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="modal_close_button"
+        <button type="button" class="btn-outline-blue" data-bs-dismiss="modal" id="modal_close_button"
         on:click={() => parentDialogClose()}
         >Close</button>
     </div>

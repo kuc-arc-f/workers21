@@ -15,6 +15,7 @@ import Chat from './chats/Chat';
 import ModalPost from './ChatShow/ModalPost.svelte';
 import PaginateBox from '../lib/components/PaginateBox.svelte';
 import Head from "../components/Head.svelte";
+import SideBar from "../components/SideBar.svelte";
 //
 const postCfg= LibChatPost.get_params()
 const chatParams = {
@@ -177,67 +178,95 @@ const parentUpdateList = async function(page: number) {
 </style>
 
 <!-- MarkUp -->
- <Head />
-<div class="container mx-auto p-4">
-  <div class="row">
-    <div class="col-sm-6">
-        <h1>{chat.name}</h1>
-        ID: {id}
-    </div>
-    <div class="col-sm-6 text-center pt-3">
-      <!--
-        <a href={`/thread/${id}`} class="btn btn-outline-primary">Thread</a>
-        <a href={`/bookmark/${id}`} class="btn btn-outline-primary">Bookmark</a>
-      -->
-    </div>
-  </div>
-  <hr class="my-1" />
-  <div class="row">
-      <div class="col-sm-9">
-      <textarea class="form-control" name="body" id="body" rows="3" />
-      </div>
-      <div class="col-sm-3">
-          <button class="mt-2 btn" on:click={addItem} >
-          Post</button>
-      </div>
-  </div>
-  <hr class="my-1" />
-  <div class="row">
-      <div class="col-md-12 pt-1">
-          <button class="btn btn-sm btn-outline-primary" on:click={() => clickClear()} 
-          >Clear</button>
-          <span class="search_key_wrap">
-              <input type="text" size="36" class="mx-2 " name="searchKey"
-               id="searchKey" placeholder="Search Key">
-          </span>
-          <button class="btn btn-sm btn-outline-primary" on:click={() => clickSearch()}>Search</button>
-      </div>
-  </div>
-  <hr class="my-1" />
-  {#each items as item}
-  <div>
-      <h5>{item.user_name}</h5>
-      <hr class="my-1" />
-      <p>{@html LibCommon.replaceBrString(item.body)}</p>
-      <p>{LibCommon.converDateString(item.createdAt)} , ID: {item.id}
-      </p>
-      <button on:click={parentShow(item.id)}
-      class="btn btn-sm btn-outline-primary">Show</button>
-      <hr />
-  </div>
-  {/each} 
-  <!-- paginate max-w-4xl  -->
-  <PaginateBox  itemPage={itemPage} parentUpdateList={parentUpdateList} /> 
-  <!-- Modal -->
-  {#if modal_display}
-  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-    <div class="bg-white rounded-lg p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
-      <ModalPost post_id={post_id} parentGetList={parentGetList} 
-      parentDialogClose={parentDialogClose} />
-    </div>
-  </div>
-  {/if}
-</div>
+<div class="bg-gray-50 font-sans">
+  <div class="flex h-screen">
+    <SideBar />
+    <!-- メインコンテンツ -->
+    <main class="flex-1 bg-gray-50 p-4">
+        <!-- ヘッダー -->
+        <header class="flex items-center justify-between p-4 bg-white shadow-md rounded-md mb-4">
+            <div class="relative flex-grow">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-6a7 7 0 10-14 0 7 7 0 0014 0z"></path></svg>
+                </div>
+                <input type="text" 
+                class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-md bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search something here">
+            </div>
+            <div class="flex items-center space-x-4 ml-4">
+                <button class="p-2 text-gray-500 hover:text-gray-700 focus:outline-none">
+                  Search
+                </button>
+                <div class="relative">
+                    <button class="flex items-center space-x-2 focus:outline-none">
+                        <span class="text-sm font-semibold">User1</span>
+                        <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </header>
 
+        <!-- コンテンツエリア -->
+        <div class="bg-white rounded-md shadow-md p-4">
+            <h1 class="text-xl font-semibold mb-4">Dashboard</h1>
+            <p class="text-gray-700">Welcome to your dashboard!</p>
+            <!-- ダッシュボードの内容をここに追加 -->
+            <div class="row">
+              <div class="col-sm-6">
+                  <h1>{chat.name}</h1>
+                  ID: {id}
+              </div>
+              <div class="col-sm-6 text-center pt-3">
+              </div>
+            </div>
+            <hr class="my-1" />
+            <div class="row">
+                <div class="col-sm-9">
+                <textarea class="input_textarea" name="body" id="body" rows="3" />
+                </div>
+                <div class="col-sm-3">
+                    <button class="mt-2 btn" on:click={addItem} >
+                    Post</button>
+                </div>
+            </div>
+            <hr class="my-1" />
+            {#each items as item}
+            <div>
+                <h5>{item.user_name}</h5>
+                <hr class="my-1" />
+                <p>{@html LibCommon.replaceBrString(item.body)}</p>
+                <p>{LibCommon.converDateString(item.createdAt)} , ID: {item.id}
+                </p>
+                <button on:click={parentShow(item.id)}
+                class="btn-outline-blue">Show</button>
+                <hr />
+            </div>
+            {/each} 
+            <!-- paginate max-w-4xl  -->
+            <PaginateBox  itemPage={itemPage} parentUpdateList={parentUpdateList} /> 
+            <!-- Modal -->
+            {#if modal_display}
+            <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+              <div class="bg-white rounded-lg p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+                <ModalPost post_id={post_id} parentGetList={parentGetList} 
+                parentDialogClose={parentDialogClose} />
+              </div>
+            </div>
+            {/if}            
+        </div>
+    </main>
+  </div>
+</div>
 <!--
+<div class="row">
+    <div class="col-md-12 pt-1">
+        <button class="btn btn-sm btn-outline-primary" on:click={() => clickClear()} 
+        >Clear</button>
+        <span class="search_key_wrap">
+            <input type="text" size="36" class="mx-2 " name="searchKey"
+             id="searchKey" placeholder="Search Key">
+        </span>
+        <button class="btn btn-sm btn-outline-primary" on:click={() => clickSearch()}>Search</button>
+    </div>
+</div>
+<hr class="my-1" />
 --->
