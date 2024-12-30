@@ -1,3 +1,6 @@
+//import { hash } from '@cloudflare/workers-bcrypt';
+import bcrypt from "bcryptjs";
+
 //
 const router = {
   /**
@@ -6,15 +9,33 @@ const router = {
   *
   * @return
   */
-  create: async function (req: any, res: any, env: any): Promise<Response>
+  create: async function (request: any, res: any, env: any): Promise<Response>
   {
+    const req = await request.json();
 console.log(req);
     const retObj = {ret: "NG", data: [], message: ''}
     try{
       if (req) {
+        if (!req.email) {
+          return new Response('email is required', { status: 400 });
+        }
+        if (!req.password) {
+          return new Response('password is required', { status: 400 });
+        }
+        if (!req.username) {
+          return new Response('username is required', { status: 400 });
+        }
+        //const hashedPassword = await hash(req.password, 10);
+        //let hashed_password = bcrypt.hashSync("1111", 10);
+        //const password = "your_password_here";
+        const saltRounds = 10;
+        // パスワードをハッシュ化
+        const hashedPassword = await bcrypt.hash(req.password, saltRounds);
+        console.log("hashedPassword=", hashedPassword);
+
         const sql = `
         INSERT INTO User ( name, email, password, updatedAt)
-        VALUES('${req.name}', '${req.email}', '${req.password}',
+        VALUES('${req.username}', '${req.email}', '${hashedPassword}',
         CURRENT_TIMESTAMP
         );
         `;
@@ -34,9 +55,7 @@ console.log(resulte);
         const item_id = resultId.results[0].id;
 console.log("item_id=", item_id);
         req.id = item_id;
-
 //console.log(resultId);
-        //id
       }            
       return Response.json({ret: "OK", data: req});
     } catch (e) {
@@ -138,6 +157,65 @@ console.log(sql);
       return Response.json(retObj);
     } 
   }, 
- 
+
+  login: async function (body: any , env: any): any
+  {
+    console.log(body);
+    let item = {};
+    let result: any = {}; 
+    let ret = false;
+    try{
+
+      if (body) {
+        const sql = `
+        SELECT * FROM User
+        WHERE email = '${body.email}'
+        `;     
+console.log(sql);   
+        result = await env.DB.prepare(sql).all();
+//console.log(result.results);
+        if(result.results.length < 1) {
+          console.error("Error, results.length < 1");
+          throw new Error('Error , get');
+        }
+        item = result.results[0];
+        //console.log("item.password=", item.password);
+        const isMatch = await bcrypt.compare(body.password, item.password);
+      }      
+      return true;
+    } catch (e) {
+      console.error(e);
+      return ret;
+    } 
+  },
+
+  getUserId: async function (body: any , env: any): any
+  {
+    console.log(body);
+    let item = {};
+    let result: any = {}; 
+    let ret = false;
+    try{
+
+      if (body) {
+        const sql = `
+        SELECT * FROM User
+        WHERE email = '${body.email}'
+        `;     
+console.log(sql);   
+        result = await env.DB.prepare(sql).all();
+//console.log(result.results);
+        if(result.results.length < 1) {
+          console.error("Error, results.length < 1");
+          throw new Error('Error , get');
+        }
+        item = result.results[0];
+      }      
+      return item;
+    } catch (e) {
+      console.error(e);
+      return ret;
+    } 
+  },
 }
 export default router;

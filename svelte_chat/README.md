@@ -6,7 +6,7 @@
 
  date    : 2024/12/29
 
- update  :
+ update  : 2024/12/30 
 
 ***
 ### Summary
@@ -27,7 +27,6 @@ yarn watch
 ### Setting
 
 * wrangler.toml
-* authrize : USER_NAME,  PASSWORD set
 
 ```
 name = "workers21"
@@ -39,10 +38,6 @@ assets = { directory = "./public/" }
 
 [vars]
 PUBLIC_SYSTEM_NAME = "workers21chat"
-USER_ID = "1"
-USER_NAME = ""
-PASSWORD = ""
-
 
 [[d1_databases]]
 binding = "DB"

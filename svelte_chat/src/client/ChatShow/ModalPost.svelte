@@ -28,13 +28,12 @@ const loadProc = async function () {
     console.log("#loadProc.id=", post_id);
         userId = LibAuth.getUserId();
         let item = await ChatPost.get(Number(post_id));
-console.log(item);
+        //console.log(item);
         post_body = item.body;
         postUserName = item.user_name;
         postUserId = item.userId;
         chatId = item.chatId;
         dateStr = LibCommon.converDatetimeString(item.createdAt);
-        
         await getThread();
     } catch (e) {
         console.error(e);
@@ -88,6 +87,9 @@ console.log(post_id, bodyString, chatId, postUserId);
 const childDeleteItem = async function () : Promise<void>
 {
   try {
+    if (window.confirm("Delete OK ?") === false) {
+      return;
+    }
     //console.log("user.id=", userId);
 console.log("postUserId=", postUserId);
     await ChatPost.delete(post_id);
@@ -145,15 +147,23 @@ console.log("deleteThread=", id);
 <div class="chat_show_modal_body">
     <!-- Modal_body -->
     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">{postUserName} </h5>
-        <span class="text-secondary mx-2">{dateStr}</span>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="text-end">
+        <button type="button" class="text-2xl mx-2" aria-label="Close"
+        on:click={() => parentDialogClose()}>×</button>
+      </div>
+      <div class="flex flex-row">
+        <div class="flex-1 p-2 m-1">
+          <h5 class="text-1xl font-bold">{postUserName} </h5>
+        </div>
+        <div class="flex-1 p-2 m-1">
+          <span class="text-secondary mx-2">{dateStr} , ID: {post_id}</span>
+        </div>
+      </div>
+        
     </div>
     <div class="modal-body">
         <p>{@html LibCommon.replaceBrString(post_body)}
         </p>
-        <hr />
-        ID: {post_id}
         <hr class="my-1" />
         <!-- replay_box -->
         <div class="row">
@@ -167,11 +177,11 @@ console.log("deleteThread=", id);
               Reply</button>
           </div>
         </div>  
-        <!-- thread --> 
+        <!-- thread dateStr = LibCommon.converDateString(item.createdAt); --> 
         {#each threadItems as item}
         <div>
           <div class="thread_user_name">
-            <span class="fs-5">{item.user_name}: </span>{item.createdAt}
+            <span class="text-xl">{item.user_name}: </span>{LibCommon.converDateString(item.createdAt)}
             <button 
             class="bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white ms-2 py-0.5 px-1 border border-blue-500 hover:border-transparent rounded;"
             on:click={() => deleteThread(item.thread_id)} >
@@ -184,7 +194,7 @@ console.log("deleteThread=", id);
         </div>
         {/each}     
     </div>
-    <div class="modal-footer my-2">
+    <div class="modal-footer my-2 text-end">
         {#if (postUserId === userId)}
           <button type="button" class="btn btn-outline-red" id="modal_post_btn_delete"
           on:click={() => childDeleteItem()}

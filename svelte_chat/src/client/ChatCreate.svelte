@@ -4,16 +4,13 @@
 </svelte:head>
 
 <script lang="ts">
-//import LibConfig from '$lib/LibConfig';
-//import LibAuth from '$lib/LibAuth';
-//import { goto } from '$app/navigation';
 import CrudCreate from './chats/CrudCreate';
 
 export let data;
 console.log(data);
 
 /**
- * addPost
+ *
  * @param
  *
  * @return
@@ -35,10 +32,11 @@ console.log(result);
 
 <!-- MarkUp -->
 <div class="container mx-auto p-4">
-	<a href={`/#/chats`} class="btn">[ Back ]
+	<a href={`/#/chats`} class="btn">Back
 	</a>		
+	<hr class="my-2" />
 	<h1 class="text-3xl">Create</h1>
-	<hr />
+	<hr class="my-2" />
 	<div class="col-sm-6">
 		<label>Name:</label>
         <input type="text" name="name" id="name" class="input_text"

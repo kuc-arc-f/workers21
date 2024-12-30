@@ -38,10 +38,10 @@ export default {
 		let res = {}; 
 		let response = null;
 		//user
-		if (path === "/users/create") {
+		if (path === "/api/users/create") {
 			response = await userRouter.create(request, res, env);  
 		}
-		if (path === "/users/get") {
+		if (path === "/api/users/get") {
 			response = await userRouter.get(request, res, env);  
 		}
 		if (path === "/api/chats/create") {
@@ -145,7 +145,7 @@ export default {
 
 		//MPA 
 		const coolieAuth = await getCookieAuth(request, env);
-		//console.log("coolieAuth=", coolieAuth);
+		console.log("coolieAuth=", coolieAuth);
 		//console.log("env.USER_ID=", env.USER_ID);
 		const htm = Top({coolieAuth: coolieAuth , userId : env.USER_ID});
 		return new Response(htm, {
@@ -158,17 +158,18 @@ export default {
 // ログイン処理
 async function handleLogin(request: any, env: any) {
   const body = await request.json();
-  const { username, password } = body;
+  const { email, password } = body;
   console.log("#handleLogin");
   console.log(body);
   // 認証チェック (例: 固定ユーザー)
-  if (username === env.USER_NAME && password === env.PASSWORD) {
-    // トークンを生成 (簡易例: 暗号化)
-    const token = btoa(`${username}:${Date.now()}:SECRET_KEY`);
-    // Cookieを設定
+  const result = await userRouter.login(body , env);
+  console.log(result);
+  if (result) {
+    const user = await userRouter.getUserId(body , env);
+    console.log(user);
     return new Response("Login successful", {
       headers: {
-        "Set-Cookie": `${COOKIE_NAME}=${token}; HttpOnly; Path=/; Secure`,
+        "Set-Cookie": `${COOKIE_NAME}=${user.id}; HttpOnly; Path=/; Secure`,
         "Content-Type": "text/plain",
       },
     });
@@ -180,9 +181,6 @@ async function handleLogin(request: any, env: any) {
 async function getCookieAuth(request, env) : boolean
 {
   let ret = "";
-  if(!env.USER_NAME && !env.PASSWORD){
-    return ret;
-  }
   const cookies = parseCookies(request);
   //console.log(cookies);
   if (cookies[COOKIE_NAME]) {
@@ -192,22 +190,6 @@ async function getCookieAuth(request, env) : boolean
   return ret;
 }
 
-// 認証が必要なページ
-// * @return true: sucsess
-async function handleProtectedPage(request, env) : boolean
-{
-  let ret = false;
-  if(!env.USER_NAME && !env.PASSWORD){
-    return true;
-  }
-  const cookies = parseCookies(request);
-  console.log(cookies);
-  if (cookies[COOKIE_NAME]) {
-    const token = cookies[COOKIE_NAME];
-    return true;
-  }
-  return ret;
-}
 // Cookieを解析
 function parseCookies(request) {
   const cookieHeader = request.headers.get("Cookie") || "";
