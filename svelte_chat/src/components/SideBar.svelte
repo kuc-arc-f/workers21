@@ -1,4 +1,16 @@
-  <!-- サイドバー -->
+<script lang="ts">
+import LibCookie from "../lib/LibCookie";
+import LibConfig from "../lib/LibConfig";  
+
+const logOut = function(): void
+{
+  console.log("#logOut.key=" , LibConfig.COOKIE_KEY_USER)
+  LibCookie.deleteCookie(LibConfig.COOKIE_KEY_USER);
+  location.href = "/#/login";
+}  
+</script>
+
+<!-- サイドバー -->
   <aside class="bg-white w-64 flex flex-col border-r border-gray-200">
     <div class="p-4 border-b border-gray-200">
       <a href="/">
@@ -55,8 +67,10 @@
             </a>
             -->
         </nav>
+        <!-- a href="#" -->
         <div class="border-t border-gray-200 mt-4 pt-4">
-            <a href="#" class="flex items-center space-x-2 p-2 rounded-md hover:bg-gray-100">
+            <a on:click={() => {logOut()}}
+             class="flex items-center space-x-2 p-2 rounded-md hover:bg-gray-100">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v-3a5 5 0 00-5-5H6a1 1 0 00-1 1v14a1 1 0 001 1h3.5m8.356-1m-1.18-5.109a4.5 4.5 0 00-1.802-.586m1.18-5.109a4.5 4.5 0 011.801-.586m-3.369-1.443L9 5" />
                 </svg>

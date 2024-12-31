@@ -161,15 +161,19 @@ async function handleLogin(request: any, env: any) {
   const { email, password } = body;
   console.log("#handleLogin");
   console.log(body);
-  // 認証チェック (例: 固定ユーザー)
+  
   const result = await userRouter.login(body , env);
   console.log(result);
   if (result) {
     const user = await userRouter.getUserId(body , env);
-    console.log(user);
-    return new Response("Login successful", {
+    //console.log(user);
+		const now = new Date();
+		// Cookieの有効期限を設定（例: 365日後）
+		const expires = new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000).toUTCString();
+		return new Response("Login successful", {
+			// HttpOnly; Secure
       headers: {
-        "Set-Cookie": `${COOKIE_NAME}=${user.id}; HttpOnly; Path=/; Secure`,
+        "Set-Cookie": `${COOKIE_NAME}=${user.id}; expires=${expires}; path=/;`,
         "Content-Type": "text/plain",
       },
     });

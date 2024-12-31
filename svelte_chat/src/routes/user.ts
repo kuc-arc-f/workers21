@@ -181,6 +181,10 @@ console.log(sql);
         item = result.results[0];
         //console.log("item.password=", item.password);
         const isMatch = await bcrypt.compare(body.password, item.password);
+        console.log("isMatch=", isMatch);
+        if(!isMatch){
+          return ret;
+        }
       }      
       return true;
     } catch (e) {
