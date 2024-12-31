@@ -182,11 +182,13 @@ console.log("deleteThread=", id);
           <div class="thread_user_name">
             <span class="text-1xl font-bold">{item.user_name}</span>
             <span class="text-gray-400">{LibCommon.converDateString(item.createdAt)}</span>
+            {#if (userId === item.userId)}
             <button 
             class="bg-transparent hover:bg-gray-500 text-gray-700 hover:text-white ms-2 py-0.5 px-1 border border-gray-500 hover:border-transparent rounded-md;"
             on:click={() => deleteThread(item.thread_id)} >
             ×
             </button>
+            {/if}
           </div>
           
           <p>{@html LibCommon.replaceBrString(item.body)}</p>
