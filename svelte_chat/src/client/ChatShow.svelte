@@ -172,10 +172,7 @@ const parentUpdateList = async function(page: number) {
 }
 </script>
 
-<!-- CSS -->
-<style>
-.chat_show_modal_wrap #open_post_show { display: none ;}
-</style>
+
 
 <!-- MarkUp -->
 <div class="bg-gray-50 font-sans">
@@ -190,20 +187,34 @@ const parentUpdateList = async function(page: number) {
                   <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-6a7 7 0 10-14 0 7 7 0 0014 0z"></path></svg>
               </div>
               <input type="text" 
-              class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-md bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search something here">
+              class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-md bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+               placeholder="Search Key">
           </div>
           <div class="flex items-center space-x-4 ml-4">
-              <button class="p-2 text-gray-500 hover:text-gray-700 focus:outline-none">
+              <button class="p-2 btn-outline-blue">
                 Search
               </button>
               <div class="relative">
+                <!--
                   <button class="flex items-center space-x-2 focus:outline-none">
                       <span class="text-sm font-semibold">User1</span>
+                      <span class="text-sm font-semibold">
+                      </span>
                       <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                   </button>
+                -->
+                <button class="flex items-center space-x-2 focus:outline-none">
+                  <svg class="user-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="32" cy="32" r="30" fill="#CCC" />
+                    <circle cx="32" cy="24" r="12" fill="#fff" />
+                    <path d="M16,54 C16,44 24,36 32,36 C40,36 48,44 48,54 Z" fill="#fff" />
+                  </svg>
+                </button>
               </div>
           </div>
+
       </header>
+
       <!-- コンテンツエリア -->
       <div class="bg-white rounded-md shadow-md p-4">
         <h1 class="text-xl font-semibold mb-2">Input</h1>
@@ -260,6 +271,11 @@ const parentUpdateList = async function(page: number) {
     </main>
   </div>
 </div>
+<!-- CSS -->
+<style>
+  .chat_show_modal_wrap #open_post_show { display: none ;}
+
+</style>
 <!--
 <div class="row">
     <div class="col-md-12 pt-1">

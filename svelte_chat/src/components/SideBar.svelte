@@ -4,9 +4,12 @@ import LibConfig from "../lib/LibConfig";
 
 const logOut = function(): void
 {
-  console.log("#logOut.key=" , LibConfig.COOKIE_KEY_USER)
-  LibCookie.deleteCookie(LibConfig.COOKIE_KEY_USER);
-  location.href = "/#/login";
+  //console.log("#logOut.key=" , LibConfig.COOKIE_KEY_USER)
+  if (window.confirm("LogOut OK ?")) {
+    LibCookie.deleteCookie(LibConfig.COOKIE_KEY_USER);
+    location.href = "/#/login";
+  }
+
 }  
 </script>
 
