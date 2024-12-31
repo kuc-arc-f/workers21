@@ -6,7 +6,7 @@
 
  date    : 2024/12/29
 
- update  : 2024/12/30 
+ update  : 2025/01/01
 
 ***
 ### Summary
@@ -46,6 +46,8 @@ database_id = ""
 ```
 ***
 ### blog 
+
+https://zenn.dev/link/comments/586822e81dd077
 
 ***
 
