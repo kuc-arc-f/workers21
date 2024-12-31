@@ -31,17 +31,22 @@ console.log(result);
 </script>
 
 <!-- MarkUp -->
-<div class="container mx-auto p-4">
-	<a href={`/#/chats`} class="btn">Back
-	</a>		
-	<hr class="my-2" />
-	<h1 class="text-3xl">Create</h1>
-	<hr class="my-2" />
-	<div class="col-sm-6">
-		<label>Name:</label>
-        <input type="text" name="name" id="name" class="input_text"
-           />		
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+	<div class="bg-white p-8 rounded shadow-md w-full max-w-sm">
+		<a href={`/#/chats`} class="btn-outline-blue">Back
+		</a>		
+		<hr class="my-4" />
+		<h1 class="text-3xl">Create</h1>
+		<hr class="my-2" />
+		<div class="col-sm-6">
+			<label>Name:</label>
+					<input type="text" name="name" id="name" class="input_text"
+						 />		
+		</div>
+		<button on:click={addPost} 
+		class="btn my-4">Add</button>
+	
 	</div>
-	<button on:click={addPost} class="btn btn-primary my-2">Add</button>
-	<hr />
 </div>
+<!--
+-->

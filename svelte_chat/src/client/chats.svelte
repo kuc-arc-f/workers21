@@ -62,46 +62,48 @@ console.log(items);
     }    
 }
 </script>
-<!-- class="container mx-auto p-4" -->
+<!-- class="container bg-white" -->
 <div class="bg-gray-100">
   <Head />
-  <div class="container mx-auto p-4 bg-white pb-24"> 
-    <div class="col-sm-6"><h1 class="text-3xl font-bold">Chat</h1>
+  <div class="container mx-auto p-4  pb-24"> 
+    <!-- Title -->
+    <div class="bg-white rounded-md shadow-md p-4">
+      <div class="col-sm-6">
+        <h1 class="text-3xl font-bold">Chat</h1>
+      </div>
+      <div class="col-sm-6 text-end pt-1">
+          <a href={`/#/chatcreate`} class="btn btn-primary">Create
+          </a>		
+      </div>
+      <div class="col-md-12 pt-1">
+        <button class="btn btn-sm btn-outline-primary"  on:click={() => clickClear()}
+          >Clear</button>
+          <span class="search_key_wrap">
+              <input type="text" size="36" class="mx-2 my-2 input_text" name="searchKey"
+               id="searchKey" placeholder="Search Key">
+          </span>
+          <button class="btn btn-sm btn-outline-primary" on:click={() => clickSearch()}>Search</button>
+      </div>
+
     </div>
-    <div class="col-sm-6 text-end pt-1">
-        <a href={`/#/chatcreate`} class="btn btn-primary">Create
-        </a>		
-    </div>
-    <hr class="my-1" />
-    <div class="row">
-        <div class="col-md-12 pt-1">
-            <button class="btn btn-sm btn-outline-primary"  on:click={() => clickClear()}
-            >Clear</button>
-            <span class="search_key_wrap">
-                <input type="text" size="36" class="mx-2 my-2 input_text" name="searchKey"
-                 id="searchKey" placeholder="Search Key">
-            </span>
-            <button class="btn btn-sm btn-outline-primary" on:click={() => clickSearch()}>Search</button>
-        </div>
-    </div>	
+<!--
+    -->
     <hr class="my-1" />
     {#each items as item}
-    <div>
+    <div class="bg-white rounded-md shadow-md p-4 mt-4">
       <div class="pb-2">
-        <a href={`/chats/${item.id}`} ><h3>{item.name}</h3></a>		
+        <a href={`/chats/${item.id}`} >
+          <h3 class="text-2xl">{item.name}</h3>
+        </a>		
       </div>
       <!-- <a href={`/testapishow/${item.id}`} use:link > -->
       <p>ID : {item.id}
         <a href={`/chatshow/${item.id}`} use:link class="btn btn-sm btn-outline-primary ms-2">Show
         </a>		
       </p>		
-      <hr class="my-1" />
     </div>
     {/each}	
   </div>
-
 </div>
-
-
 <!-- 
 -->

@@ -12,7 +12,12 @@ const router = {
     try{
       const req = await request.json();
       if (req) {
-        //console.log(req);
+        console.log(req);
+        // req.name
+        if(!req.name){
+          throw new Error('Error , name none');
+          //return Response.json(retObj);
+        }
         const sql = `
         INSERT INTO Chat ( name, content, userId)
         VALUES('${req.name}', '${req.content}', ${req.userId});
