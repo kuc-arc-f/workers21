@@ -7,29 +7,28 @@
     "dev": "wrangler dev",
     "start": "wrangler dev",
     "build": "vite build --mode client && npm run build:css",
-    "build:css": "npx tailwindcss -i ./src/main.css -o ./public/main.css",
+    "build:css": "npx @tailwindcss/cli -i ./src/main.css -o ./public/main.css",
     "clean": "rimraf public/static",
     "watch": "nodemon"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20241218.0",
     "@sveltejs/vite-plugin-svelte": "^3.1.0",
-    "autoprefixer": "^10.4.20",
     "better-sqlite3": "^11.5.0",
     "nodemon": "^3.1.7",
-    "postcss": "^8.4.49",
     "rimraf": "^6.0.1",
     "svelte": "^4.2.9",
     "svelte-check": "^3.6.3",
     "svelte-spa-router": "^4.0.1",
-    "tailwindcss": "^3.4.17",
     "tslib": "^2.6.2",
     "typescript": "^5.5.2",
     "vite": "^5.2.11",
     "wrangler": "^3.60.3"
   },
   "dependencies": {
+    "@tailwindcss/cli": "^4.0.0-beta.8",
     "bcryptjs": "^2.4.3",
-    "moment": "^2.30.1"
+    "moment": "^2.30.1",
+    "tailwindcss": "^4.0.0-beta.8"
   }
 }

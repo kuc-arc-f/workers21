@@ -1,4 +1,4 @@
-﻿# svelte chat
+﻿# svelte Chat
 
  Version: 0.9.1
 
