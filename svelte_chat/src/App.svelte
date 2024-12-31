@@ -11,6 +11,8 @@ import LibLayout from './client/lib/LibLayout';
     let pathTmp = `/${name.toLowerCase()}`; 
     if(name === 'Home') { pathTmp ='/'};
     if(name === 'ChatShow') { pathTmp ='/chatshow/:id'};
+    if(name === 'Thread') { pathTmp ='/thread/:id'};
+    if(name === 'Bookmark') { pathTmp ='/bookmark/:id'};
     return {
       name,
       //path: name === 'Home' ? '/' : `/${name.toLowerCase()}`,

@@ -35,8 +35,8 @@ let items = [], itemsAll = [], itemPage = 1, perPage: number = 100;
 //
 onMount(() => {
   console.log("#onMount");
-  id = Number(params.id);
-console.log("itemId=", id);
+  //id = Number(params.id);
+//console.log("itemId=", id);
   startProc();
 });
 /**
@@ -102,11 +102,13 @@ console.log("search:", skey);
 */
 const startProc= async function() {
     try{
+      /*
         const key = LibConfig.COOKIE_KEY_LAST_CHAT;
         LibCookie.setCookie(key, String(id));
         itemsAll = await ChatPost.getList(id);
         items = await CrudIndex.getPageList(itemsAll, itemPage, perPage);
         console.log(itemsAll);
+      */
         //const chatData = await Chat.get(Number(id));
         //chat = chatData;
 //console.log(chatData);
@@ -161,12 +163,7 @@ console.log("parentShow=", id)
         console.log(e);
     }
 }
-/**
-*
-* @param
-*
-* @return
-*/ 
+
 const parentUpdateList = async function(page: number) {
   console.log("parentUpdateList=", page);
   itemPage = page;
@@ -180,7 +177,7 @@ const parentUpdateList = async function(page: number) {
 <!-- MarkUp -->
 <div class="bg-gray-50 font-sans">
   <div class="flex h-screen">
-    <SideBar mode={MODE_HOME} id={params.id} />
+    <SideBar mode={MODE_THREAD} id={params.id} />
     <!-- メインコンテンツ -->
     <main class="flex-1 bg-gray-50 p-4">
       <!-- ヘッダー -->
@@ -198,14 +195,6 @@ const parentUpdateList = async function(page: number) {
                 Search
               </button>
               <div class="relative">
-                <!--
-                  <button class="flex items-center space-x-2 focus:outline-none">
-                      <span class="text-sm font-semibold">User1</span>
-                      <span class="text-sm font-semibold">
-                      </span>
-                      <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                  </button>
-                -->
                 <button class="flex items-center space-x-2 focus:outline-none">
                   <svg class="user-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="32" cy="32" r="30" fill="#CCC" />
@@ -220,29 +209,10 @@ const parentUpdateList = async function(page: number) {
 
       <!-- コンテンツエリア -->
       <div class="bg-white rounded-md shadow-md p-4">
-        <h1 class="text-xl font-semibold mb-2">Input</h1>
-        <!-- ダッシュボードの内容をここに追加 
-        ID: {id}
-        <div class="row">
-          <div class="col-sm-6">
-              <h1>{chat.name}</h1>
-          </div>
-          <div class="col-sm-6 text-center pt-3">
-          </div>
-        </div>
-        <hr class="my-1" />
-        -->
-        <div class="row">
-            <div class="col-sm-9">
-            <textarea class="input_textarea" name="body" id="body" rows="3" />
-            </div>
-            <div class="col-sm-3">
-                <button class="mt-2 btn" on:click={addItem} >
-                Post</button>
-            </div>
-        </div>
+        <h1 class="text-xl font-semibold mb-2">Thread</h1>
       </div>
       <!-- List -->
+      <!--
       {#each items as item}
       <div class="bg-white rounded-md shadow-md p-4 mt-4">
         <div>
@@ -256,11 +226,10 @@ const parentUpdateList = async function(page: number) {
         </div>
       </div>
       {/each}
+      -->
 
       <div class="bg-white rounded-md shadow-md p-4 my-2">
-        <!-- paginate max-w-md -->
         <PaginateBox  itemPage={itemPage} parentUpdateList={parentUpdateList} /> 
-        <!-- Modal -->
         {#if modal_display}
         <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div class="bg-white rounded-lg p-6 w-full max-w-xl max-h-[90vh] overflow-y-auto">
@@ -279,17 +248,4 @@ const parentUpdateList = async function(page: number) {
   .chat_show_modal_wrap #open_post_show { display: none ;}
 
 </style>
-<!--
-<div class="row">
-    <div class="col-md-12 pt-1">
-        <button class="btn btn-sm btn-outline-primary" on:click={() => clickClear()} 
-        >Clear</button>
-        <span class="search_key_wrap">
-            <input type="text" size="36" class="mx-2 " name="searchKey"
-             id="searchKey" placeholder="Search Key">
-        </span>
-        <button class="btn btn-sm btn-outline-primary" on:click={() => clickSearch()}>Search</button>
-    </div>
-</div>
-<hr class="my-1" />
---->
+
