@@ -170,7 +170,8 @@ async function handleLogin(request: any, env: any) {
 		const now = new Date();
 		// Cookieの有効期限を設定（例: 365日後）
 		const expires = new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000).toUTCString();
-		return new Response("Login successful", {
+		const userdata = {userId: user.id };
+		return new Response(JSON.stringify({ret: 200, data: userdata}), {
 			// HttpOnly; Secure
       headers: {
         "Set-Cookie": `${COOKIE_NAME}=${user.id}; expires=${expires}; path=/;`,
