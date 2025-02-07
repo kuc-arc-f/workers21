@@ -113,9 +113,10 @@ console.log(req);
   *
   * @return
   */
-  get: async function (req: any, res: any, env: any): Promise<Response>
+  get: async function (request: any, res: any, env: any): Promise<Response>
   {
-//    console.log(req);
+    const req = await request.json();
+    console.log(req);
     let item = {};
     let result: any = {}; 
     const retObj = {ret: "NG", data: [], message: ''}
