@@ -232,8 +232,9 @@ console.log(sql);
   *
   * @return
   */
-  search: async function (req: any, res: any, env: any): Promise<Response>
+  search: async function (request: any, res: any, env: any): Promise<Response>
   {
+    const req = await request.json();
 //console.log(req);
     let resulte: any = [];
     const retObj = {ret: "NG", data: [], message: ''}
@@ -258,7 +259,7 @@ console.log(sql);
         LIMIT 1000     
         `;  
         resulte = await env.DB.prepare(sql).all();
-//console.log(sql);
+console.log(sql);
         if(resulte.length < 1) {
           console.error("Error, results.length < 1");
           throw new Error('Error , get');
