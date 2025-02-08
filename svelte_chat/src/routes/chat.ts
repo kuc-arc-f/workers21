@@ -180,9 +180,10 @@ console.log(sql);
   *
   * @return
   */
- search: async function (req: any, res: any, env: any): Promise<Response>
+ search: async function (request: any, res: any, env: any): Promise<Response>
  {
-//    console.log(req);
+   const req = await request.json();
+console.log(req);
    let resulte: any = [];
    const retObj = {ret: "NG", data: [], message: ''}
    try{
