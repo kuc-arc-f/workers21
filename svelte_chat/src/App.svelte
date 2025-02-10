@@ -27,7 +27,7 @@ import LibLayout from './client/lib/LibLayout';
     let compo = item.component;
     routeArray[item.path] = compo;
   });
-  console.log(routeArray);
+  //console.log(routeArray);
 LibLayout.startProc();
 </script>
 

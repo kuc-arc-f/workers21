@@ -79,7 +79,9 @@ console.log(items);
         <button class="btn btn-sm btn-outline-primary"  on:click={() => clickClear()}
           >Clear</button>
           <span class="search_key_wrap">
-              <input type="text" size="36" class="mx-2 my-2 input_text" name="searchKey"
+              <input type="text" size="36" 
+              class="border border-gray-400 rounded-md px-3 py-2 w-1/2 focus:outline-none focus:border-blue-500"
+               name="searchKey"
                id="searchKey" placeholder="Search Key">
           </span>
           <button class="btn btn-sm btn-outline-primary" on:click={() => clickSearch()}>Search</button>

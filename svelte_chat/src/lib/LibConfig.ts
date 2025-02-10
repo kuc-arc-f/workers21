@@ -9,7 +9,7 @@ const LibConfig = {
   SESSION_KEY_USER: "user",
   SESSION_KEY_CHAT_POST: "chat_posts",
   //cookie
-  COOKIE_KEY_LAST_CHAT: "kit_last_chat",
+  COOKIE_KEY_LAST_CHAT: "workers21_last_chat",
   COOKIE_KEY_USER: "workers21auth",
   COOKIE_KEY_AUTH: "kit27_user_auth",
   COOKIE_KEY_SESSION: "kit27_session", 

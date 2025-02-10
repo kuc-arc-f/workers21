@@ -1,7 +1,6 @@
 //import moment from 'moment'
 import LibConfig from '../../lib/LibConfig'
 import HttpCommon from '../../lib/HttpCommon';
-
 //
 const LibChat = {
   /**
@@ -13,16 +12,24 @@ const LibChat = {
   get: async function(id: number): Promise<any>
   {
     try{
+      //console.log("#Get");
       let ret = {};
       let item: any = {
         "id": id
       };
-      const json = await HttpCommon.server_post(item, "/chats/get");
-//console.log(json);
-      if(json.ret === LibConfig.OK_CODE) {
-        ret = json.data;
-        //        console.log(json.data);
+      const body: any = JSON.stringify(item);	
+      const res = await fetch("/api/chats/get", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},      
+        body: body
+      });
+      if (res.status !== 200) {
+        throw new Error(await res.text());
       }
+      const json = await res.json()
+      //console.log(json);   
+      ret = json.data;
+
       return ret;
     } catch (e) {
       console.error(e);

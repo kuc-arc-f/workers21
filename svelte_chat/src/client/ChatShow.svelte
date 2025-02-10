@@ -107,9 +107,9 @@ const startProc= async function() {
         itemsAll = await ChatPost.getList(id);
         items = await CrudIndex.getPageList(itemsAll, itemPage, perPage);
         console.log(itemsAll);
-        //const chatData = await Chat.get(Number(id));
-        //chat = chatData;
-//console.log(chatData);
+        const chatData = await Chat.get(Number(id));
+        chat = chatData;
+console.log(chatData);
     } catch (e) {
     console.error(e);
     }
@@ -220,7 +220,7 @@ const parentUpdateList = async function(page: number) {
 
       <!-- コンテンツエリア -->
       <div class="bg-white rounded-md shadow-md p-4">
-        <h1 class="text-xl font-semibold mb-2">Input</h1>
+        <h1 class="text-xl font-semibold mb-2">{chat.name}</h1>
         <!-- ダッシュボードの内容をここに追加 
         ID: {id}
         <div class="row">

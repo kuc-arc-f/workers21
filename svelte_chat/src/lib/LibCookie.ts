@@ -2,7 +2,7 @@ import moment from 'moment'
 //
 const LibCookie = {
   /**
-  * setCookie
+  *
   * @param key: string
   *
   * @return Promise<any>
