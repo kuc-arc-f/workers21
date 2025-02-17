@@ -1,7 +1,6 @@
 
-//
+
 export default function Compo(props: any) {
-  //console.log("path=", props.path)
   const html = `<!DOCTYPE html><html lang="en">
   <body>
     <script>
@@ -12,5 +11,3 @@ export default function Compo(props: any) {
   `
   return html;
 }
-/*
-*/

@@ -33,6 +33,7 @@ export default function Page(props: any) {
 console.log("response=", response.ok);
       if (response.ok) {
         alert("Login successful!");
+        location.href = "/";
       } else {
         alert("Invalid credentials.");
       }
@@ -44,5 +45,4 @@ console.log("response=", response.ok);
   return htm;
 }
 /*
-src="/public/static/entry-client.js"
 */
