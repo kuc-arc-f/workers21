@@ -28,7 +28,6 @@ const path = url.pathname;
 //console.log("url=", url);
 console.log("path=", path);
 const method = request.method;
-//const requestBody = method === 'POST' || method === 'PUT' ? await request.json() : null;
 console.log("method=", method);
 
 
@@ -49,6 +48,32 @@ console.log("method=", method);
   
     return { data: JSON.stringify(result), status: 200 , ret: true}
   }
+  if (path === '/api/todo14delete' && request.method === 'POST') {
+    //    const id = path.split('/').pop();
+    const todo = await request.json();
+    const result = await env.DB.prepare('DELETE FROM todo14 WHERE id = ?')
+        .bind(todo.id)
+        .run();
+    return { data:JSON.stringify(result), status: 200 , ret: true}
+  }
+  if (path === '/api/todo14update' && request.method === 'POST') {
+    const todo = await request.json();
+    console.log(todo);
+    if (!todo.id || !todo) {
+      return { data: null, status: 400 , ret: true}
+    }    
+    const { title, completed } = todo;
+    const updatedTodo = await env.DB.prepare("UPDATE todo14 SET title = ?, completed = ? WHERE id = ? RETURNING *")
+      .bind(title, completed ? 1 : 0, todo.id)
+      .first();
+  
+    if (!updatedTodo) {
+      return { data: null, status: 400 , ret: true}
+    }
+
+    return { data:JSON.stringify(updatedTodo), status: 200 , ret: true}
+  }
+
   // Read TODOs (with search)
   if (path === '/api/todo14' && request.method === 'GET') {
     console.log("# /api/todo14");
@@ -73,10 +98,7 @@ console.log("method=", method);
   if (path.match(/\/api\/todo14\/\d+/) && request.method === 'PUT') {
     const id = path.split('/').pop();
     const todo: Todo = await request.json();
-    
-    //const id = pathname.split('/').pop();
     if (!id || !todo) {
-      //return new Response('Bad Request: id and body are required', { status: 400 });
       return { data: null, status: 400 , ret: true}
     }
   
