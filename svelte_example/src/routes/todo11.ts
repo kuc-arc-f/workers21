@@ -37,6 +37,46 @@ if (path === '/api/todo11/search') {
     return { data: JSON.stringify(todos), status: 200 , ret: true}
   }
 }
+//update
+if (path === '/api/todo11update' && request.method === 'POST') {
+  const todo  = await request.json();
+  console.log(todo);
+    
+  if (!todo.title) {
+    return { data: null, status: 400, ret: false}
+  }
+
+  const result = await env.DB.prepare(
+      `UPDATE todo11 
+        SET title = ?, description = ?, completed = ?, 
+            updated_at = CURRENT_TIMESTAMP 
+        WHERE id = ? 
+        RETURNING *`
+  )
+  .bind(todo.title, todo.description || '', todo.completed || false, todo.id)
+  .all();
+
+  if (!result.results.length) {
+    return { data: null, status: 400, ret: false}
+  }
+  return { data: JSON.stringify(result.results[0]), status: 200, ret: true}
+}
+  //delete
+if (path === '/api/todo11delete' && request.method === 'POST') {
+  const todo = await request.json();
+  console.log(todo);
+
+  const result = await env.DB.prepare(
+    'DELETE FROM todo11 WHERE id = ? RETURNING *'
+  )
+  .bind(todo.id)
+  .all();
+
+  if (!result.results.length) {
+    return { data: null, status: 400, ret: false}
+  }
+  return { data: JSON.stringify(todo), status: 200, ret: true}
+}
 // 一般的なCRUD操作
 if (path === '/api/todo11') {
   //console.log("# /api/todo11");
