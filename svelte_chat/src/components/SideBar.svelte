@@ -54,9 +54,9 @@ const logOut = function(): void
 }  
 </script>
 
-<!-- サイドバー -->
+<!-- サイドバー  border-b -->
 <aside class="side_bar_wrap bg-white w-64 flex flex-col border-r border-gray-200">
-  <div class="p-4 border-b border-gray-200">
+  <div class="p-4 border-gray-200">
     <a href="/">
       <div class="flex items-center space-x-2">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -106,17 +106,9 @@ const logOut = function(): void
               </svg>
               <span>Settings</span>
           </a>
-          <!--
-          <a href="#" class="flex items-center space-x-2 p-2 rounded-md hover:bg-gray-100">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span>Help & Center</span>
-          </a>
-          -->
       </nav>
-      <!-- a href="#" -->
-      <div class="border-t border-gray-200 mt-4 pt-4">
+      <!--  -->
+      <div class="border-t border-gray-200 mt-4 mb-[40px] pt-4">
           <a on:click={() => {logOut()}}
             class="flex items-center space-x-2 p-2 rounded-md hover:bg-gray-100">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">

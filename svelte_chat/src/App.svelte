@@ -36,7 +36,6 @@ LibLayout.startProc();
 <main>
   <hr />
   <Router routes={routeArray} />
-  <hr />
 </main>
 
 <style>
