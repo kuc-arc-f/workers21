@@ -1,14 +1,15 @@
 //
 const router = {
   /**
-  * create
+  *
   * @param
   *
   * @return
   */
-  create: async function (req: any, res: any, env: any): Promise<Response>
+  create: async function (request: any, res: any, env: any): Promise<Response>
   {
 //console.log("/threads/create");
+    const req = await request.json();
 console.log(req);
     const retObj = {ret: "NG", data: [], message: ''}
     try{
@@ -49,8 +50,9 @@ console.log("item_id=", item_id);
   *
   * @return
   */ 
-  delete: async function (req: any, res: any, env: any): Promise<Response>
+  delete: async function (request: any, res: any, env: any): Promise<Response>
   {
+    const req = await request.json();
 console.log(req);
     const retObj = {ret: "NG", data: [], message: ''}
     try{
@@ -78,10 +80,12 @@ console.log(sql);
   *
   * @return
   */ 
-  get_list: async function (req: any, res: any, env: any): Promise<Response>
+  get_list: async function (request: any, res: any, env: any): Promise<Response>
   {
-console.log(req);
     let resulte: any = [];
+    const req = await request.json();
+    console.log(req);
+
     const retObj = {ret: "NG", data: [], message: ''}
     try{
       let result: any = {};  
@@ -105,7 +109,7 @@ console.log(req);
         WHERE "BookMark"."chatId" = ${req.chatId}
         AND "BookMark"."userId" = ${req.userId}
         ORDER BY BookMark.id DESC 
-        LIMIT 1000       
+        LIMIT 20       
         `; 
 //console.log(sql);
         resulte = await env.DB.prepare(sql).all();

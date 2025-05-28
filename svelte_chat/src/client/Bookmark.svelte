@@ -8,10 +8,13 @@ import { onMount } from 'svelte';
 import LibConfig from '../lib/LibConfig';
 import LibCommon from '../lib/LibCommon';
 import LibChatPost from '../lib/LibChatPost';
+import LibAuth from '../lib/LibAuth';;
 import CrudIndex from './chats/CrudIndex';
 import LibCookie from '../lib/LibCookie';
 import ChatPost from './chats/ChatPost';
 import Chat from './chats/Chat';
+import BookMark from './chats/BookMark';
+
 import ModalPost from './ChatShow/ModalPost.svelte';
 import PaginateBox from '../lib/components/PaginateBox.svelte';
 import Head from "../components/Head.svelte";
@@ -30,17 +33,19 @@ const chatParams = {
 export let params: any;
 export let data: any, chat_posts: any[] = [], DATA = chatParams, chat: any = {id: 0, name:""},
 post_id = 0, modal_display = false, mTimeoutId: any = 0, user:any = {}, lastCreateTime: string = "";
-let id = 0;
+let id = 0 , userId = 0;
 let items = [], itemsAll = [], itemPage = 1, perPage: number = 100;
 //
 onMount(() => {
   console.log("#onMount");
-  //id = Number(params.id);
-//console.log("itemId=", id);
+  id = Number(params.id);
+  userId = LibAuth.getUserId();
+console.log("itemId=", id);
+console.log("userId=", userId);
   startProc();
 });
 /**
-* addItem
+*
 * @param
 *
 * @return
@@ -57,7 +62,7 @@ console.log(items);
     }    
 }
 /**
- * clickClear
+ *
  * @param
  *
  * @return
@@ -102,11 +107,13 @@ console.log("search:", skey);
 */
 const startProc= async function() {
     try{
+      const d = await BookMark.getItems(id , userId);
+      console.log(d);
+      items = d;
     } catch (e) {
     console.error(e);
     }
 }
-//startProc();
 /**
  *
  * @param
@@ -160,9 +167,23 @@ const parentUpdateList = async function(page: number) {
   items = await CrudIndex.getPageList(itemsAll, page, perPage);
   console.log(items);
 }
+
+/**
+ *
+ * @param
+ *
+ * @return
+ */
+const deleteBookmark = async function (bookmark_id: number) {
+    try {
+console.log("deleteBookmark=" , bookmark_id);
+        await BookMark.delete(bookmark_id);
+        items = await BookMark.getItems(id, userId);
+    } catch (e) {
+        console.error(e);
+    }    
+}
 </script>
-
-
 
 <!-- MarkUp -->
 <div class="bg-gray-50 font-sans">
@@ -202,26 +223,25 @@ const parentUpdateList = async function(page: number) {
         <h1 class="text-xl font-semibold mb-2">Bookmark</h1>
       </div>
       <!-- List -->
-      <!--
       {#each items as item}
       <div class="bg-white rounded-md shadow-md p-4 mt-4">
-        <div>
-          <h5 class="text-1xl font-bold">{item.user_name}</h5>
+          <h5>{item.user_name}</h5>
           <hr class="my-1" />
           <p>{@html LibCommon.replaceBrString(item.body)}</p>
-          <p>{LibCommon.converDateString(item.createdAt)} , ID: {item.id}
+          <p>{LibCommon.converDateString(item.createdAt)} , ID: {item.bookmark_id}
+          <button class="btn-outline-red mx-2"
+           on:click={deleteBookmark(item.bookmark_id)}
+          >Delete</button>
+          <button on:click={parentShow(item.chatPostId)}
+          class="btn btn-sm btn-outline-primary">Show</button>        
           </p>
-          <button on:click={parentShow(item.id)}
-          class="btn-outline-blue">Show</button>
-        </div>
-      </div>
+      </div>      
       {/each}
-      -->
 
       <div class="bg-white rounded-md shadow-md p-4 my-2">
         <PaginateBox  itemPage={itemPage} parentUpdateList={parentUpdateList} /> 
         {#if modal_display}
-        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
           <div class="bg-white rounded-lg p-6 w-full max-w-xl max-h-[90vh] overflow-y-auto">
             <ModalPost post_id={post_id} parentGetList={parentGetList} 
             parentDialogClose={parentDialogClose} />
@@ -236,6 +256,5 @@ const parentUpdateList = async function(page: number) {
 <!-- CSS -->
 <style>
   .chat_show_modal_wrap #open_post_show { display: none ;}
-
 </style>
 

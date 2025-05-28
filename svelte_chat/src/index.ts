@@ -37,7 +37,16 @@ export default {
 		//API
 		let res = {}; 
 		let response = null;
-		//user
+		if (path === "/api/bookmark/create") {
+			response = await bookmarkRouter.create(request, res, env);  
+		}
+		if (path === "/api/bookmark/delete") {
+			response = await bookmarkRouter.delete(request, res, env);  
+		}
+		if (path === "/api/bookmark/get_list") {
+			response = await bookmarkRouter.get_list(request, res, env);  
+		}
+		
 		if (path === "/api/users/create") {
 			response = await userRouter.create(request, res, env);  
 		}

@@ -265,11 +265,11 @@ const parentUpdateList = async function(page: number) {
       {/each}
 
       <div class="bg-white rounded-md shadow-md p-4 my-2">
-        <!-- paginate max-w-md -->
+        <!-- paginate -->
         <PaginateBox  itemPage={itemPage} parentUpdateList={parentUpdateList} /> 
         <!-- Modal -->
         {#if modal_display}
-        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
           <div class="bg-white rounded-lg p-6 w-full max-w-xl max-h-[90vh] overflow-y-auto">
             <ModalPost post_id={post_id} parentGetList={parentGetList} 
             parentDialogClose={parentDialogClose} />

@@ -197,6 +197,8 @@ console.log("deleteThread=", id);
         {/each}     
     </div>
     <div class="modal-footer my-2 text-end">
+        <button type="button" class="btn-outline-blue" on:click={() => addBookMark()}
+        >BookMark</button>
         {#if (postUserId === userId)}
           <button type="button" class="btn btn-outline-red" id="modal_post_btn_delete"
           on:click={() => childDeleteItem()}
@@ -210,6 +212,4 @@ console.log("deleteThread=", id);
 </div>
 
 <!-- 
-<button type="button" class="btn btn-outline-primary" on:click={() => addBookMark()}
->BookMark</button>            
 -->

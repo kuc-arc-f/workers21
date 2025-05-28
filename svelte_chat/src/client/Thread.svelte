@@ -12,6 +12,8 @@ import CrudIndex from './chats/CrudIndex';
 import LibCookie from '../lib/LibCookie';
 import ChatPost from './chats/ChatPost';
 import Chat from './chats/Chat';
+import Thread from './chats/Thread';
+
 import ModalPost from './ChatShow/ModalPost.svelte';
 import PaginateBox from '../lib/components/PaginateBox.svelte';
 import Head from "../components/Head.svelte";
@@ -35,8 +37,8 @@ let items = [], itemsAll = [], itemPage = 1, perPage: number = 100;
 //
 onMount(() => {
   console.log("#onMount");
-  //id = Number(params.id);
-//console.log("itemId=", id);
+  id = Number(params.id);
+console.log("itemId=", id);
   startProc();
 });
 /**
@@ -102,13 +104,9 @@ console.log("search:", skey);
 */
 const startProc= async function() {
     try{
-      /*
-        const key = LibConfig.COOKIE_KEY_LAST_CHAT;
-        LibCookie.setCookie(key, String(id));
-        itemsAll = await ChatPost.getList(id);
-        items = await CrudIndex.getPageList(itemsAll, itemPage, perPage);
-        console.log(itemsAll);
-      */
+        const data = await Thread.getChatItems(id);
+        items = data;
+console.log(items);
         //const chatData = await Chat.get(Number(id));
         //chat = chatData;
 //console.log(chatData);
@@ -212,26 +210,22 @@ const parentUpdateList = async function(page: number) {
         <h1 class="text-xl font-semibold mb-2">Thread</h1>
       </div>
       <!-- List -->
-      <!--
       {#each items as item}
       <div class="bg-white rounded-md shadow-md p-4 mt-4">
-        <div>
-          <h5 class="text-1xl font-bold">{item.user_name}</h5>
-          <hr class="my-1" />
-          <p>{@html LibCommon.replaceBrString(item.body)}</p>
-          <p>{LibCommon.converDateString(item.createdAt)} , ID: {item.id}
-          </p>
-          <button on:click={parentShow(item.id)}
-          class="btn-outline-blue">Show</button>
-        </div>
+        <h5>{item.user_name}</h5>
+        <hr class="my-1" />
+        <p>{@html LibCommon.replaceBrString(item.body)}</p>
+        <p>{LibCommon.converDateString(item.createdAt)} , ID: {item.thread_id}
+        <button on:click={parentShow(item.chatPostId)}
+        class="btn btn-sm btn-outline-primary mx-2">More</button>        
+        </p>
       </div>
       {/each}
-      -->
 
       <div class="bg-white rounded-md shadow-md p-4 my-2">
         <PaginateBox  itemPage={itemPage} parentUpdateList={parentUpdateList} /> 
         {#if modal_display}
-        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
           <div class="bg-white rounded-lg p-6 w-full max-w-xl max-h-[90vh] overflow-y-auto">
             <ModalPost post_id={post_id} parentGetList={parentGetList} 
             parentDialogClose={parentDialogClose} />

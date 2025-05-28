@@ -6,7 +6,7 @@ import HttpCommon from '../../lib/HttpCommon';
 //
 const BookMark = {
   /**
-  * getItems
+  *
   * @param chatId: number
   *
   * @return
@@ -18,8 +18,22 @@ const BookMark = {
       chatId: chatId,
       userId: userId,
      }      
-     const json = await HttpCommon.server_post(item, "/bookmark/get_list");
-console.log(json);
+     //const json = await HttpCommon.server_post(item, "/api/bookmark/get_list");
+console.log("#getItems");
+console.log(item);
+     const target: any = JSON.stringify(item);	
+     const res = await fetch("/api/bookmark/get_list", {
+       method: 'POST',
+       headers: {'Content-Type': 'application/json'},      
+       body: target
+     });
+     const json = await res.json()
+//console.log(json);
+     if (res.status !== 200) {
+       console.log(json);   
+       throw new Error(await res.text());
+     }
+
      return json.data;
    } catch (e) {
      console.error(e);
@@ -62,10 +76,22 @@ console.log(json);
         chatId: chatId,
         chatPostId: chatPostId,
       }
-//console.log(item);
-//return;
-      const json = await HttpCommon.server_post(item, "/bookmark/create");
-      console.log(json);
+      //console.log(item);
+      //return;
+      //const json = await HttpCommon.server_post(item, "/api/bookmark/create");
+      //console.log(json);
+      const target: any = JSON.stringify(item);	
+      const res = await fetch("/api/bookmark/create", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},      
+        body: target
+      });
+      const json = await res.json()
+      if (res.status !== 200) {
+        console.log(json);   
+        throw new Error(await res.text());
+      }
+
     } catch (e) {
       console.error(e);
       throw new Error('Error, create');
@@ -84,8 +110,20 @@ console.log(json);
       const item = {
         id: id
       }
-      const json = await HttpCommon.server_post(item, "/bookmark/delete");
+      //const json = await HttpCommon.server_post(item, "/api/bookmark/delete");
+      //console.log(item);
+      const target: any = JSON.stringify(item);	
+      const res = await fetch("/api/bookmark/delete", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},      
+        body: target
+      });
+      const json = await res.json()
       console.log(json);
+      if (res.status !== 200) {
+        throw new Error(await res.text());
+      }
+
       return ret;
     } catch (e) {
       console.error(e);

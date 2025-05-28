@@ -15,9 +15,7 @@ const LibAuth = {
         //const cookieAuthElem = document.getElementById("userId") as HTMLInputElement;
         const cookieAuthElem = document.getElementById("cookieAuth") as HTMLInputElement;
         let cookieAuth = cookieAuthElem ? Number(cookieAuthElem.value) : null;
-        //console.log("cookieAuth", cookieAuth);
         return cookieAuth;
-        //return ret;    
       } catch (e) {
         console.error(e);
       }

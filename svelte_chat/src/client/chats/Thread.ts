@@ -15,8 +15,6 @@ const Thread = {
      const item = {
        chatPostId: chatPostId,
      }      
-     //const json = await HttpCommon.server_post(item, "/threads/get_list");
-     ///threads/get_list
      const target: any = JSON.stringify(item);	
      const res = await fetch("/api/threads/get_list", {
        method: 'POST',
