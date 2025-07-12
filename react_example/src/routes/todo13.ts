@@ -62,6 +62,7 @@ console.log("path=", path);
         const results = await env.DB.prepare(query)
             .bind(searchPattern, searchPattern)
             .all();
+
         return { data:JSON.stringify(results), status: 200 , ret: true}
         //return new Response(JSON.stringify(results), {
         //    headers: { ...corsHeaders, 'Content-Type': 'application/json' }
@@ -69,6 +70,7 @@ console.log("path=", path);
     }
 
     const results = await env.DB.prepare(query).all();
+    //console.log(results);
     return { data:JSON.stringify(results), status: 200 , ret: true}
     //return new Response(JSON.stringify(results), {
     //    headers: { ...corsHeaders, 'Content-Type': 'application/json' },

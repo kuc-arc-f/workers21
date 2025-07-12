@@ -135,6 +135,7 @@ const App = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
+      console.log(data)
       setTodos(data);
     } catch (error) {
       console.error('Failed to fetch todos:', error);
