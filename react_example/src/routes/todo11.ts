@@ -44,6 +44,60 @@ if (path === '/api/todo11/search') {
   }
 }
 // 一般的なCRUD操作
+if (path === '/api/todo11/update' && request.method === 'POST') {
+    const todo = await request.json();
+    console.log(todo);
+    if (!todo.id) {
+        return new Response('Title is required', { status: 400 });
+    }
+    console.log("todo.id=" , todo.id);
+    const id = Number(todo.id);
+    
+    const result = await env.DB.prepare(
+        `UPDATE todo11 
+          SET title = ?, description = ?, completed = ?, 
+              updated_at = CURRENT_TIMESTAMP 
+          WHERE id = ? 
+          RETURNING *`
+    )
+    .bind(todo.title, todo.description || '', todo.completed || false, id)
+    .all();
+
+    if (!result.results.length) {
+        return new Response('Todo not found', { status: 404 });
+    }
+    return { data: JSON.stringify(result.results[0]), status: 200, ret: true}
+}
+
+if (path === '/api/todo11/delete' && request.method === 'POST') {
+    console.log("# /api/todo11/delete");
+    const todo = await request.json();
+    console.log(todo);
+    
+    if (!todo.id) {
+        return new Response('Title is required', { status: 400 });
+    }
+    console.log("todo.id=" , todo.id);
+    const id = Number(todo.id);
+
+    try{
+      const result = await env.DB.prepare(
+          'DELETE FROM todo11 WHERE id = ? RETURNING *'
+      )
+      .bind(id)
+      .all();
+      console.log(result);
+      //return { data: "", status: 200, ret: true}
+      if (!result.results.length) {
+          return new Response('Todo not found', { status: 404 });
+      }
+      return { data: JSON.stringify(result.results[0]), status: 200, ret: true}
+    }catch(e){
+      return { data: "", status: 500, ret: false}
+    }
+
+}
+
 if (path === '/api/todo11') {
   //console.log("# /api/todo11");
   // 全件取得
@@ -51,6 +105,7 @@ if (path === '/api/todo11') {
       const todos = await env.DB.prepare(
           'SELECT * FROM todo11 ORDER BY created_at DESC'
       ).all();
+      console.log(todos.results);
       return { data:JSON.stringify(todos.results), status: 200 , ret: true}
       //return new Response(JSON.stringify(todos.results), {
       //    headers: {
